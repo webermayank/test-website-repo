@@ -1,11 +1,15 @@
 name: Sync Translation Changes
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'translations/**'
   pull_request:
     branches: [main]
     paths:
       - 'translations/**'
-
+      
 jobs:
   sync-translations:
     runs-on: ubuntu-latest
