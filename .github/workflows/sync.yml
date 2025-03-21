@@ -41,3 +41,19 @@ jobs:
               title: "Translation Update in Website Repo - Review Needed",
               body: `The following translation files were updated in the **test-website-repo**:\n\n- ${changedFiles.split(' ').join('\n- ')}\n\nPlease review the changes to ensure accuracy and consistency.`
             });
+          
+      - name: Create issue in website repo
+        if: github.event_name == 'push' && steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.WEBSITE_REPO_TOKEN }}
+          script: |
+            const changedFiles = "${{ steps.changed-files.outputs.all_changed_files }}";
+            const changedLines = "${{ env.CHANGED_LINES }}";
+            const supportedLanguages = "${{ env.SUPPORTED_LANGUAGES }}";
+            await github.rest.issues.create({
+              owner: "webermayank",
+              repo: "test-website-repo",
+              title: "Documentation Change in Main Repo - Translation Needed",
+              body: `Translation needed for the following files:\n\n${changedLines}\n\nPlease translate these changes into the supported languages: ${supportedLanguages}`
+            });
