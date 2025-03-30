@@ -1,7 +1,7 @@
-name: Translation Issue
+name: Translation
 about: Translation issue or new Language Sup
 title: "[Translation]: "
-labels: ["Translation",]
+labels: ["Translation"]
 assignees: []
 
 body:
