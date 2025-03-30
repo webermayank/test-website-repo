@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 name: "🎤 Translation"
-about: Translation issue or new Language Sup
-=======
-name: Translation
-description: Translation issue or new Language Sup
->>>>>>> 28ca27ba7cdcd8f33437ec067d6d5836f4988606
+description: Translation issue or new Language Support
 title: "[Translation]: "
 labels: ["Translation"]
 assignees: []
