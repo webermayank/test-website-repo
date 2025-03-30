@@ -1,4 +1,4 @@
-name: Translation
+name: "🎤 Translation"
 about: Translation issue or new Language Sup
 title: "[Translation]: "
 labels: ["Translation"]
@@ -8,9 +8,9 @@ body:
   - type: textarea
     id: bug-description
     attributes:
-      label: Describe the bug
-      description: Please provide a clear and concise description of what the bug is.
-      placeholder: Tell us what you see!
+      label: Describe the bug or new language request
+      description: Please provide a clear and concise description
+      placeholder: Lets hear your thoughts 
     validations:
       required: true
   - type: textarea
@@ -30,5 +30,12 @@ body:
         - Firefox
         - Safari
         - Edge
+  - type: Dropdown
+    id: willing to work
+    attributes:
+      label: Would you like to work on this issue?
+      options:
+        - Yes
+        - No
     validations:
       required: false
