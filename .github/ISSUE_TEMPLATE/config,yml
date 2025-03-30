@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://example.com/support
+    about: Please ask and answer questions here.
+title: Create a new issue
+body:
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: What type of issue do you want to report?
+      description: Select the appropriate category for your issue.
+      options:
+        - Translation
+       
+    validations:
+      required: true
