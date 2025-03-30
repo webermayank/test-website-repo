@@ -30,7 +30,7 @@ body:
         - Firefox
         - Safari
         - Edge
-  - type: Dropdown
+  - type: dropdown
     id: willing to work
     attributes:
       label: Would you like to work on this issue?
