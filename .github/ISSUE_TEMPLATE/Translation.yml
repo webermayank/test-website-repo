@@ -31,11 +31,11 @@ body:
         - Safari
         - Edge
   - type: dropdown
-    id: willing to work
+    id: willing-to-work
     attributes:
       label: Would you like to work on this issue?
       options:
-        - Yes
-        - No
+        - 'Yes'
+        - 'No'
     validations:
       required: false
