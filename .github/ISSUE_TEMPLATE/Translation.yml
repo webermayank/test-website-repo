@@ -4,18 +4,40 @@ title: "[Translation]: "
 labels: ["translation", "needs-template"]
 body:
   - type: dropdown
-    id: language
+    id: language_type
     attributes:
-      label: Target Language
-      description: Which language do you want to translate to?
+      label: Language Type
+      description: Are you translating to an existing supported language or proposing a new language?
+      options:
+        - Existing supported language
+        - Proposing a new language
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: existing_language
+    attributes:
+      label: Existing Language
+      description: Which supported language do you want to translate to?
       options:
         - es (Spanish)
         - zh (Chinese)
         - fr (French)
         - ja (Japanese)
         - hi (Hindi)
+      placeholder: Select a language
     validations:
-      required: true
+      required: false
+
+  - type: input
+    id: new_language
+    attributes:
+      label: New Language Proposal
+      description: If you selected "Proposing a new language", please provide the language code and name (e.g., "pt (Portuguese)", "de (German)")
+      placeholder: language-code (Language Name)
+    validations:
+      required: false
+  
   - type: input
     id: page_path
     attributes:
@@ -24,6 +46,16 @@ body:
       placeholder: /reference/p5/function-name
     validations:
       required: true
+      
+  - type: textarea
+    id: new_language_info
+    attributes:
+      label: New Language Information (if applicable)
+      description: If proposing a new language, please provide any relevant information like writing direction (RTL/LTR), special character considerations, etc.
+      placeholder: Additional information about the language...
+    validations:
+      required: false
+      
   - type: checkboxes
     id: terms
     attributes:
