@@ -1,41 +1,34 @@
-name: "🎤 Translation"
-description: Translation issue or new Language Support
+name: Translation Request
+description: Request a template for translating p5.js documentation
 title: "[Translation]: "
-labels: ["Translation"]
-assignees: []
-
+labels: ["translation", "needs-template"]
 body:
-  - type: textarea
-    id: bug-description
+  - type: dropdown
+    id: language
     attributes:
-      label: Describe the bug or new language request
-      description: Please provide a clear and concise description
-      placeholder: Lets hear your thoughts 
+      label: Target Language
+      description: Which language do you want to translate to?
+      options:
+        - es (Spanish)
+        - zh (Chinese)
+        - fr (French)
+        - ja (Japanese)
+        - hi (Hindi)
     validations:
       required: true
-  - type: textarea
-    id: steps-to-reproduce
+  - type: input
+    id: page_path
     attributes:
-      label: Steps to reproduce
-      description: Please provide steps to reproduce the behavior.
-      placeholder: 1. Go to... 2. Click on... 3. See error...
+      label: Page to Translate
+      description: What's the URL path of the page you want to translate? (e.g., /reference/p5.Camera/move)
+      placeholder: /reference/p5/function-name
     validations:
-      required: false
-  - type: dropdown
-    id: browsers
+      required: true
+  - type: checkboxes
+    id: terms
     attributes:
-      label: What browsers are you seeing the problem on?
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Contributor Guidelines](link-to-your-guidelines)
       options:
-        - Chrome
-        - Firefox
-        - Safari
-        - Edge
-  - type: dropdown
-    id: willing-to-work
-    attributes:
-      label: Would you like to work on this issue?
-      options:
-        - 'Yes'
-        - 'No'
-    validations:
-      required: false
+        - label: I agree to follow the p5.js Contributor Guidelines
+          required: true
