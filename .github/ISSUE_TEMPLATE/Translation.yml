@@ -1,4 +1,4 @@
-name: Translation Request
+name: 🎤Translation Request
 description: Request a template for translating p5.js documentation
 title: "[Translation]: "
 labels: ["translation", "needs-template"]
@@ -10,9 +10,8 @@ body:
       description: Which language do you want to translate to?
       options:
         - es (Spanish)
-        - zh (Chinese)
+        - zh-hans (Chinese)
         - fr (French)
-        - ja (Japanese)
         - hi (Hindi)
     validations:
       required: true
