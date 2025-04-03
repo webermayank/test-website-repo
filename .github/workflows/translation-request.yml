@@ -1,0 +1,118 @@
+name: Translation Template Generator
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  generate-template:
+    # Only run on issues with the "needs-template" label
+    if: contains(github.event.issue.labels.*.name, 'needs-template')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm install front-matter
+      
+      - name: Parse issue body
+        id: issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body;
+            
+            // Parse the form data from the issue body
+            // This is a simplification - you'll need to adapt based on your actual form structure
+            const languageMatch = body.match(/Target Language:.*\n.*\n- (.*)/);
+            const pagePathMatch = body.match(/Page to Translate:.*\n(.*)/);
+            
+            if (!languageMatch || !pagePathMatch) {
+              return core.setFailed('Could not parse issue body');
+            }
+            
+            const language = languageMatch[1].split(' ')[0]; // Get "es" from "es (Spanish)"
+            const pagePath = pagePathMatch[1].trim();
+            
+            core.setOutput('language', language);
+            core.setOutput('pagePath', pagePath);
+      
+      - name: Generate template
+        run: |
+          node scripts/generate-template.js ${{ steps.issue.outputs.pagePath }} ${{ steps.issue.outputs.language }}
+      
+      - name: Add comment to issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const language = '${{ steps.issue.outputs.language }}';
+            const pagePath = '${{ steps.issue.outputs.pagePath }}';
+            
+            // Convert web path to file path (simplified version)
+            const segments = pagePath.replace(/^\//, '').split('/');
+            let filePathBase = '';
+            
+            if (segments[0] === 'reference') {
+              const className = segments[1];
+              const methodName = segments[2] || '';
+              
+              if (methodName) {
+                filePathBase = `src/content/reference/${language}/${className}/${methodName}.mdx`;
+              } else {
+                filePathBase = `src/content/reference/${language}/${className}.mdx`;
+              }
+            }
+            
+            const templatePath = filePathBase + '.template';
+            
+            // Create comment with instructions
+            const comment = `
+            ## Translation Template Generated
+            
+            A template for translating this page has been created at:
+            \`${templatePath}\`
+            
+            ### Next steps:
+            
+            1. Clone the repository locally
+            2. Copy the template file (remove the .template extension):
+               \`cp ${templatePath} ${filePathBase}\`
+            3. Edit the file and translate all sections marked with:
+               \`<!-- TRANSLATE THIS SECTION -->\`
+            4. Do NOT modify code examples
+            5. Submit your changes as a pull request
+            
+            Thank you for contributing to p5.js translations!
+            `;
+            
+            // Add comment to the issue
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+            
+            // Remove the "needs-template" label
+            github.rest.issues.removeLabel({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'needs-template'
+            });
+            
+            // Add "template-generated" label
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['template-generated']
+            });
