@@ -31,8 +31,8 @@ jobs:
             
             // Parse the form data from the issue body
             // This is a simplification - you'll need to adapt based on your actual form structure
-            const languageMatch = body.match(/Target Language:.*\n.*\n- (.*)/);
-            const pagePathMatch = body.match(/Page to Translate:.*\n(.*)/);
+            const languageMatch = body.match(/Target Language:\s*- (.+)/);
+            const pagePathMatch = body.match(/Page to Translate:\s*(.+)/);
             
             if (!languageMatch || !pagePathMatch) {
               return core.setFailed('Could not parse issue body');
