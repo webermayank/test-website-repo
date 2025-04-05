@@ -40,10 +40,11 @@ body:
       description: Please provide any extra context or information that might help with the translation.
       placeholder: e.g., specific instructions, context, or additional notes...
 
-  - type: checkbox
-    id: Ask for instructions
-    attributes:
+  - type: checkboxes
+     id: ask_instructions
+     attributes:
       label: Do you need Instructions on how and where to start?
       description: Check this box if you need instructions on how and where to start the translation process.
       options:
-        - label: Yes, I would like to receive instructions.
+        - label: Yes, please include instructions
+          required: false
