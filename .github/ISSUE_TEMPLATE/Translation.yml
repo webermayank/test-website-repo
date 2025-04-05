@@ -37,7 +37,7 @@ body:
       description: Please provide any extra context or information that might help with the translation.
       placeholder: e.g., specific instructions, context, or additional notes...
 
-  - type: checkbox
+  - type: checkboxes
     id: Ask for instructions
     attributes:
       label: Do you need Instructions on how and where to start?
