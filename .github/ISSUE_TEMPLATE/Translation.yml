@@ -14,7 +14,8 @@ body:
         - fr (French)
         - hi (Hindi)
         - None of above
-
+      validations:
+        required: true
   - type: textarea
     id: other_language
     attributes:
@@ -28,8 +29,7 @@ body:
       label: Page to Translate
       description: What's the URL path of the page you want to translate? (e.g., /reference/p5.Camera/move)
       placeholder: /reference/p5/function-name
-    validations:
-      required: true
+
 
   - type: textarea
     id: extra_details
