@@ -14,8 +14,7 @@ body:
         - fr (French)
         - hi (Hindi)
         - None of above
-      validations:
-        required: true
+        
   - type: textarea
     id: other_language
     attributes:
