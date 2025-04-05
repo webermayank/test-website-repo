@@ -16,12 +16,14 @@ body:
         - None of above
     validations:
       required: true
+
   - type: textarea
     id: other_language
     attributes:
       label: Specify Other Language
       description: Please specify the target language if "None of above" is selected.
       placeholder: e.g., de (German)
+
   - type: input
     id: page_path
     attributes:
@@ -30,6 +32,7 @@ body:
       placeholder: /reference/p5/function-name
     validations:
       required: true
+
   - type: textarea
     id: extra_details
     attributes:
@@ -37,9 +40,10 @@ body:
       description: Please provide any extra context or information that might help with the translation.
       placeholder: e.g., specific instructions, context, or additional notes...
 
-  - type: checkbox
-    id: Ask for instructions
+  - type: checkboxes
+    id: ask_for_instructions
     attributes:
       label: Do you need Instructions on how and where to start?
       description: Check this box if you need instructions on how and where to start the translation process.
-      default: false
+      options:
+        - label: Yes, I would like to receive instructions.
