@@ -41,8 +41,8 @@ body:
       placeholder: e.g., specific instructions, context, or additional notes...
 
   - type: checkboxes
-     id: ask_instructions
-     attributes:
+    id: ask_instructions
+    attributes:
       label: Do you need Instructions on how and where to start?
       description: Check this box if you need instructions on how and where to start the translation process.
       options:
